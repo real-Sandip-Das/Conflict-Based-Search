@@ -1,0 +1,15 @@
+.vscode/*
+.idea/*
+assets/*.npz
+Pipfile
+Pipfile.lock
+cpp_files/cmake-build-debug/*
+Convert_Map.*
+!Convert_Map.pyx
+A_Star.*
+!A_Star.pyx
+definitions.*
+!cpp_files/include/definitions.h
+!definitions.pxi
+libCBS.*
+!libCBS.pyx

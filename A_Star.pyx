@@ -22,7 +22,7 @@ cdef extern from *:
     } pq_node;
 
     bool operator<(const pq_node n1, const pq_node n2){
-        return n1.cost < n2.cost;
+        return n1.cost > n2.cost; //since, top() in priority_queue returns the greatest element by default
     }
     """
     ctypedef struct pq_node:
@@ -165,7 +165,7 @@ cdef class AStarGraph:
                 if distance[a.y, a.x]+w < distance[b.y, b.x]:
                     distance[b.y, b.x] = distance[a.y, a.x]+w
                     parent[b.y, b.x] = a
-                    q.push(make_node(-distance[b.y, b.x].val, b, time+1))
+                    q.push(make_node(distance[b.y, b.x].val, b, time+1))
         cdef point cur_vertex = self.goal
         cdef list[point] path
         while parent[cur_vertex.y, cur_vertex.x] != cur_vertex:
