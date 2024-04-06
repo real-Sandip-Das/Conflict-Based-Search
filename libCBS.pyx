@@ -76,7 +76,7 @@ cdef class ConflictTree:
             (bint, Conflict_t): bint: whether valid/without Conflicts, Conflict_t: the first conflict, if there is any
         """
         return (*self.CT_cpp).validate(node)
-                    #TODO: Modify each Node to have a list of Conflict_t
+                    #TODO: Modify each Node to have a list of Conflict_t(done in the cpp file)
         #TODO: Complete Implementing this validate function
 
 cdef class MAPFProblem:

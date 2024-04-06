@@ -1,6 +1,7 @@
 .vscode/*
 .idea/*
 assets/*.npz
+build/*
 Pipfile
 Pipfile.lock
 cpp_files/cmake-build-debug/*

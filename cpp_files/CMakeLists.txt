@@ -7,12 +7,14 @@ set(CMAKE_CXX_STANDARD 17)
 # Define sources
 set(SOURCES
         src/ConflictTree.cpp
+        src/AStar.cpp
         )
 
 # Define headers
 set(HEADERS
         include/ConflictTree.h
         include/definitions.h
+        include/AStar.h
         )
 
 # Add executable

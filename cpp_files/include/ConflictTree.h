@@ -9,7 +9,7 @@
 #include "definitions.h"
 
 typedef struct {
-    std::list<std::pair<int, Constraint_t>>
+    std::list<std::pair<int, Constraint_t>> constraints;
     std::vector<std::list<point>> solutions;
     int cost;
     CTree_Node* parent;
