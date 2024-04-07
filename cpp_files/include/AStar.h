@@ -22,7 +22,7 @@ namespace cppfiles {
         double h(point);
         bool not_constrained(point, int);
         bool is_reachable(point, int);
-        std::vector<std::pair<point, double>> find_neighbours(point, int);
+        std::vector<std::tuple<point, double, double>> find_neighbours(point, int);
     public:
         std::pair<std::list<point>, double> optimal_path();
 

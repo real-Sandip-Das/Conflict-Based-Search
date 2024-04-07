@@ -1,24 +1,20 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.20)
 
 project(ConflictBasedSearch)
 
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-# Define sources
 set(SOURCES
-        src/ConflictTree.cpp
         src/AStar.cpp
+        src/main.cpp
         )
 
-# Define headers
 set(HEADERS
-        include/ConflictTree.h
         include/definitions.h
         include/AStar.h
         )
 
-# Add executable
-add_executable(ConflictBasedSearch ${SOURCES} ${HEADERS})
+add_executable(ConflictBasedSearch ${SOURCES})
 
-# Include directories
 target_include_directories(ConflictBasedSearch PUBLIC include)

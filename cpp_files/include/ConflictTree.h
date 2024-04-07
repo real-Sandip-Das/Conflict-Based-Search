@@ -7,7 +7,7 @@
 #include <stack>
 #include <utility>
 #include "definitions.h"
-
+//TODO: add ConflictTree.h and ConflictTree.cpp to CMakeLists.txt
 typedef struct {
     std::list<std::pair<int, Constraint_t>> constraints;
     std::vector<std::list<point>> solutions;
