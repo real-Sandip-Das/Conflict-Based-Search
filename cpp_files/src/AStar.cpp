@@ -147,7 +147,7 @@ std::pair<std::list<point>, double> cppfiles::AStarGraph::optimal_path() {
         neighbours = find_neighbours(a, time);
         for (unsigned int i = 0; i<neighbours.size(); i++) {
             point b;
-            double h_diff; //h(b-h(a)
+            double h_diff; //h(b)-h(a)
             double d;
             std::tie(b, d, h_diff) = neighbours[i];
             if (distance[a.y][a.x] + d + h_diff < distance[b.y][b.x]) {//A* is much like Dijkstra's with d'(x,y)=d(x,y)+h(b)-h(a)
@@ -159,11 +159,11 @@ std::pair<std::list<point>, double> cppfiles::AStarGraph::optimal_path() {
     }
     point cur_vertex = goal;
     std::list<point> path;
-    path.push_back(start);
     while (!(parent[cur_vertex.y][cur_vertex.x] == cur_vertex)) {
         path.push_front(cur_vertex);
         cur_vertex = parent[cur_vertex.y][cur_vertex.x];
     }
+    path.push_front(start);
     double cost = 0; //for calculating cost of path
     for (auto it2 = path.begin(), it1 = it2++;it2 != path.end(); it1++, it2++) {
         if((it1->x-it2->x) && (it1->y-it2->y)) { //i.e. diagonally adjacent

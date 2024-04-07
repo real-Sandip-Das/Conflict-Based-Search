@@ -25,6 +25,7 @@ cdef class AStarInstance:
         cdef data = np.load("assets/map"+str(map_id)+".npz")
         self.map_image = data["map_image"]
         map_arr = data["map_arr"]
+        print(map_arr.shape)
         self.height, self.width = map_arr.shape
         cdef int i, j
         self.map_arr.resize(self.height, vector[int](self.width))
@@ -35,7 +36,13 @@ cdef class AStarInstance:
     cpdef double solve(self, bint display_path, int start_y, int start_x, int goal_y, int goal_x):
         cdef list[pair[int, int]] path
         cdef double cost
+        print("I'm here")
+        self.map_arr = [[1, 1, 1],
+        [1, 4, 2],
+        [1, 2, 1],
+        [1, 1, 1]] #debug
         print(a_star(self.map_arr, start_y, start_x, goal_y, goal_x)) #debug
+        print("I'm not here")
         path, cost = a_star(self.map_arr, start_y, start_x, goal_y, goal_x)
         cdef int x, y
         if display_path:
