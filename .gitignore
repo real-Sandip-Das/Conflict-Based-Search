@@ -6,7 +6,6 @@ build/*
 Pipfile
 Pipfile.lock
 cpp_files/cmake-build-debug/*
-cpp_files/src/main.cpp
 Convert_Map.*
 !Convert_Map.pyx
 A_Star.*
