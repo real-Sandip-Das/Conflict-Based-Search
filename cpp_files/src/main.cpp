@@ -14,8 +14,8 @@ int main()
 		std::cout << "No Image data" << std::endl;
 		return -1;
 	}
-	namedWindow("An Image", WINDOW_AUTOSIZE );
-	imshow("An Image", image);
+	namedWindow("Lena Image", WINDOW_AUTOSIZE );
+	imshow("Lena Image", image);
 	waitKey(0);
 	destroyAllWindows();
 	std::vector<std::vector<int>> map_arr = {
