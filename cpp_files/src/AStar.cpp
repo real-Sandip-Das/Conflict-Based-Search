@@ -1,6 +1,7 @@
 #include "../include/AStar.h"
 #include <cmath>
 #include <queue>
+#include <tuple>
 
 const double sqrt2 = sqrt(2);
 
@@ -113,13 +114,13 @@ std::vector<std::tuple<point, double, double>> cppfiles::AStarGraph::find_neighb
     temp = {left, right, up, down, a};
     for (point each_point: temp) {
         if (is_reachable(each_point, t)) {
-            neighbours.push_back({each_point, 1, h(each_point)-h(a)});
+            neighbours.emplace_back(each_point, 1, h(each_point)-h(a));
         }
     }
     temp = {up_right, up_left, down_right, down_left};
     for (point each_point: temp) {
         if (is_reachable(each_point, t)) {
-            neighbours.push_back({each_point, sqrt2, h(each_point)-h(a)});
+            neighbours.emplace_back(each_point, sqrt2, h(each_point)-h(a));
         }
     }
     return neighbours;
