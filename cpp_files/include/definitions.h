@@ -1,10 +1,12 @@
+#pragma once
+
 #ifndef DEFINITIONS_H
 #define DEFINITIONS_H
 
-#define W 1
-#define G 2
-#define B 4
+#define SCALE 2
 #include <list>
+
+enum class MapPixel {W, G, B};
 
 typedef struct {
     int x;

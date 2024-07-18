@@ -1,7 +1,7 @@
 #include <opencv2/opencv.hpp>
+#include "../include/ConvertMap.h"
 #include "../include/AStar.h"
 #include "../include/ConflictTree.h"
-#include <iostream> //debug
 
 using namespace cv;
 
@@ -9,23 +9,24 @@ using namespace cv;
 
 int main()
 {
-    /*
-	const Mat image = imread("/home/anonub/Projects/Conflict-Based-Search/lena.png");
+	Mat image;
+    auto converted_map  = convert_map(3);
+    image = converted_map.value().second;
 	if ( !image.data )
 	{
 		std::cout << "No Image data" << std::endl;
 		return -1;
 	}
-	namedWindow("Lena Image", WINDOW_AUTOSIZE );
-	imshow("Lena Image", image);
+	namedWindow("Map Image", WINDOW_AUTOSIZE );
+	imshow("Map Image", image);
 	waitKey(0);
 	destroyAllWindows();
-     */
-	std::vector<std::vector<int>> map_arr = {
-	    {G, W, W, G},
-	    {W, W, W, W},
-	    {W, W, W, W},
-	    {G, W, W, G}
+
+	std::vector<std::vector<MapPixel>> map_arr = {
+	    {MapPixel::G, MapPixel::W, MapPixel::W, MapPixel::G},
+	    {MapPixel::W, MapPixel::W, MapPixel::W, MapPixel::W},
+	    {MapPixel::W, MapPixel::W, MapPixel::W, MapPixel::W},
+	    {MapPixel::G, MapPixel::W, MapPixel::W, MapPixel::G}
 	};
     std::vector<point> starts = {{1, 0}, {0, 1}};
     std::vector<point> goals = {{2, 3}, {3, 2}};

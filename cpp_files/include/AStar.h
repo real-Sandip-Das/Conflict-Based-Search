@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef ASTAR_H
 #define ASTAR_H
 
@@ -9,7 +11,7 @@
 class AStarGraph
 {
 private:
-    const std::vector<std::vector<int>>& map_arr;
+    const std::vector<std::vector<MapPixel>>& map_arr;
     int height;
     int width;
     point start, goal;
@@ -25,7 +27,7 @@ private:
 public:
     std::pair<std::list<point>, double> optimal_path();
 
-    AStarGraph(const std::vector<std::vector<int>>& given_map_arr, const Problem_t& problem) :
+    AStarGraph(const std::vector<std::vector<MapPixel>>& given_map_arr, const Problem_t& problem) :
         map_arr(given_map_arr), start(problem.start), goal(problem.goal)
     {
         height = map_arr.size();
@@ -36,6 +38,6 @@ public:
     }
 };
 
-std::pair<std::list<std::pair<int, int>>, double> a_star(const std::vector<std::vector<int>>&, int, int, int, int); //for testing the A* implementation on individual agents
-std::pair<std::list<point>, double> low_level(const std::vector<std::vector<int>>&, const Problem_t&); // for use in the Conflict Based Search Algorithm
+std::pair<std::list<std::pair<int, int>>, double> a_star(const std::vector<std::vector<MapPixel>>&, int, int, int, int); //for testing the A* implementation on individual agents
+std::pair<std::list<point>, double> low_level(const std::vector<std::vector<MapPixel>>&, const Problem_t&); // for use in the Conflict Based Search Algorithm
 #endif //ASTAR_H

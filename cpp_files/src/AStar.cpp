@@ -91,7 +91,7 @@ bool AStarGraph::not_constrained(point a, int t) {
 
 bool AStarGraph::is_reachable(point a, int t) {
     if (0 <= a.x && a.x < width && 0 <= a.y && a.y < height) {
-        if (map_arr[a.y][a.x] == W) {
+        if (map_arr[a.y][a.x] == MapPixel::W) {
             if (not_constrained(a, t)) {
                 return true;
             }
@@ -176,7 +176,7 @@ std::pair<std::list<point>, double> AStarGraph::optimal_path() {
     return {path, cost};
 }
 
-std::pair<std::list<std::pair<int, int>>, double> a_star(const std::vector<std::vector<int>>& map_arr, int start_y, int start_x, int goal_y, int goal_x) {
+std::pair<std::list<std::pair<int, int>>, double> a_star(const std::vector<std::vector<MapPixel>>& map_arr, int start_y, int start_x, int goal_y, int goal_x) {
     point start = {start_x, start_y};
     point goal = {goal_x, goal_y};
     Problem_t problem = {start, goal, std::list<Constraint_t>()};
@@ -191,7 +191,7 @@ std::pair<std::list<std::pair<int, int>>, double> a_star(const std::vector<std::
     return std::make_pair(return_path, cost);
 }
 
-std::pair<std::list<point>, double> low_level(const std::vector<std::vector<int>>& map_arr, const Problem_t& problem) {
+std::pair<std::list<point>, double> low_level(const std::vector<std::vector<MapPixel>>& map_arr, const Problem_t& problem) {
     AStarGraph Cur_Graph(map_arr, problem);
     return Cur_Graph.optimal_path();
 }

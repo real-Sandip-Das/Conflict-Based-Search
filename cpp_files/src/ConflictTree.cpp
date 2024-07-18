@@ -93,7 +93,7 @@ std::optional<Conflict_t> ConflictTree::validate(const std::shared_ptr<CTree_Nod
     return {};
 }
 
-std::pair<double, Solution_t> call_low_level(const std::vector<std::vector<int>>& map, const std::vector<Problem_t>& problems_without_constraints, const std::list<std::pair<int, Constraint_t>>& constraints)
+std::pair<double, Solution_t> call_low_level(const std::vector<std::vector<MapPixel>>& map, const std::vector<Problem_t>& problems_without_constraints, const std::list<std::pair<int, Constraint_t>>& constraints)
 {
     double sic = 0;
     Solution_t solution;
@@ -112,7 +112,7 @@ std::pair<double, Solution_t> call_low_level(const std::vector<std::vector<int>>
 }
 
 std::optional<Solution_t> conflict_based_search(
-        const std::vector<std::vector<int>>& map, const std::vector<point>& starts, const std::vector<point>& goals, int n_agents
+        const std::vector<std::vector<MapPixel>>& map, const std::vector<point>& starts, const std::vector<point>& goals, int n_agents
 )
 {
     std::vector<Problem_t> problemsWithoutConstraints;

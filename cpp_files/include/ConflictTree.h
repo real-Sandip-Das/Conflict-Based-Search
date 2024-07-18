@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef CONFLICTTREE_H
 #define CONFLICTTREE_H
 
@@ -45,6 +47,6 @@ public:
 };
 
 //! Conflict Based Search
-std::optional<Solution_t> conflict_based_search(const std::vector<std::vector<int>>& map, const std::vector<point>& starts, const std::vector<point>& goals, int n_agents);
+std::optional<Solution_t> conflict_based_search(const std::vector<std::vector<MapPixel>>& map, const std::vector<point>& starts, const std::vector<point>& goals, int n_agents);
 
 #endif //CONFLICTTREE_H

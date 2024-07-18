@@ -12,7 +12,8 @@ set(SOURCES
         src/AStar.cpp
         src/ConflictTree.cpp
         src/main.cpp
-        )
+        src/ConvertMap.cpp
+)
 
 set(HEADERS
         include/definitions.h
