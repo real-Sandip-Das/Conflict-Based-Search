@@ -70,7 +70,7 @@ public:
 };
 
 
-double cppfiles::AStarGraph::h(point v) {
+double AStarGraph::h(point v) {
     if (!h_calculated[v.y][v.x]) {
         h_vec[v.y][v.x] = hypot(v.x-goal.x, v.y-goal.y);
         h_calculated[v.y][v.x] = true;
@@ -78,7 +78,7 @@ double cppfiles::AStarGraph::h(point v) {
     return h_vec[v.y][v.x];
 }
 
-bool cppfiles::AStarGraph::not_constrained(point a, int t) {
+bool AStarGraph::not_constrained(point a, int t) {
     for (Constraint_t constraint: constraints) {
         if (constraint.t == t) {
             if (constraint.v.x == a.x && constraint.v.y == a.y){
@@ -89,7 +89,7 @@ bool cppfiles::AStarGraph::not_constrained(point a, int t) {
     return true;
 }
 
-bool cppfiles::AStarGraph::is_reachable(point a, int t) {
+bool AStarGraph::is_reachable(point a, int t) {
     if (0 <= a.x && a.x < width && 0 <= a.y && a.y < height) {
         if (map_arr[a.y][a.x] == W) {
             if (not_constrained(a, t)) {
@@ -100,7 +100,7 @@ bool cppfiles::AStarGraph::is_reachable(point a, int t) {
     return false;
 }
 
-std::vector<std::tuple<point, double, double>> cppfiles::AStarGraph::find_neighbours(point a, int t) {
+std::vector<std::tuple<point, double, double>> AStarGraph::find_neighbours(point a, int t) {
     std::vector<std::tuple<point, double, double>> neighbours;//vector of ((point, time), cost)
     point left = {a.x-1, a.y};
     point right = {a.x+1, a.y};
@@ -113,20 +113,20 @@ std::vector<std::tuple<point, double, double>> cppfiles::AStarGraph::find_neighb
     std::vector<point> temp;
     temp = {left, right, up, down, a};
     for (point each_point: temp) {
-        if (is_reachable(each_point, t)) {
+        if (is_reachable(each_point, t+1)) {
             neighbours.emplace_back(each_point, 1, h(each_point)-h(a));
         }
     }
     temp = {up_right, up_left, down_right, down_left};
     for (point each_point: temp) {
-        if (is_reachable(each_point, t)) {
+        if (is_reachable(each_point, t+1)) {
             neighbours.emplace_back(each_point, sqrt2, h(each_point)-h(a));
         }
     }
     return neighbours;
 }
 
-std::pair<std::list<point>, double> cppfiles::AStarGraph::optimal_path() {
+std::pair<std::list<point>, double> AStarGraph::optimal_path() {
     std::priority_queue<pq_node> q;
     std::vector<std::vector<Cost>> distance(height, std::vector<Cost>(width, Cost(-1)));
     std::vector<std::vector<point>> parent(height, std::vector<point>(width, {-1, -1}));
@@ -176,22 +176,22 @@ std::pair<std::list<point>, double> cppfiles::AStarGraph::optimal_path() {
     return {path, cost};
 }
 
-std::pair<std::list<std::pair<int, int>>, double> cppfiles::a_star(std::vector<std::vector<int>>& map_arr, int start_y, int start_x, int goal_y, int goal_x) {
+std::pair<std::list<std::pair<int, int>>, double> a_star(const std::vector<std::vector<int>>& map_arr, int start_y, int start_x, int goal_y, int goal_x) {
     point start = {start_x, start_y};
     point goal = {goal_x, goal_y};
-    Problem_t problem = {start, goal, std::list<std::pair<int, Constraint_t>>()};
-    cppfiles::AStarGraph Cur_Graph(map_arr , problem);
+    Problem_t problem = {start, goal, std::list<Constraint_t>()};
+    AStarGraph Cur_Graph(map_arr , problem);
     double cost;
     std::list<point> path;
     std::tie(path, cost) = Cur_Graph.optimal_path();
     std::list<std::pair<int, int>> return_path;
     for (point position: path) {
-        return_path.push_back({position.y, position.x});
+        return_path.emplace_back(position.y, position.x);
     }
     return std::make_pair(return_path, cost);
 }
 
-std::pair<std::list<point>, double> cppfiles::low_level(std::vector<std::vector<int>>& map_arr, Problem_t problem) {
-    cppfiles::AStarGraph Cur_Graph(map_arr, problem);
+std::pair<std::list<point>, double> low_level(const std::vector<std::vector<int>>& map_arr, const Problem_t& problem) {
+    AStarGraph Cur_Graph(map_arr, problem);
     return Cur_Graph.optimal_path();
 }

@@ -1,5 +1,6 @@
 #include <opencv2/opencv.hpp>
 #include "../include/AStar.h"
+#include "../include/ConflictTree.h"
 #include <iostream> //debug
 
 using namespace cv;
@@ -8,7 +9,8 @@ using namespace cv;
 
 int main()
 {
-	const Mat image = imread("C:/Users/sandi/Downloads/lena.jpg");
+    /*
+	const Mat image = imread("/home/anonub/Projects/Conflict-Based-Search/lena.png");
 	if ( !image.data )
 	{
 		std::cout << "No Image data" << std::endl;
@@ -18,14 +20,23 @@ int main()
 	imshow("Lena Image", image);
 	waitKey(0);
 	destroyAllWindows();
+     */
 	std::vector<std::vector<int>> map_arr = {
+	    {G, W, W, G},
 	    {W, W, W, W},
 	    {W, W, W, W},
-	    {W, W, W, W},
-	    {W, W, W, W}
+	    {G, W, W, G}
 	};
-	std::pair<std::list<std::pair<int, int>>, double> a;
-	a = cppfiles::a_star(map_arr, 0, 0, 3, 3);
-	std::cout << a.second << std::endl;
+    std::vector<point> starts = {{1, 0}, {0, 1}};
+    std::vector<point> goals = {{2, 3}, {3, 2}};
+    auto solution = conflict_based_search(map_arr, starts, goals, 2);
+    if (solution.has_value()) {
+        for (auto& agent_solution: solution.value()) {
+            for (auto& path_point: agent_solution) {
+                std::cout << "{" << path_point.x << ", " << path_point.y << "} ";
+            }
+            std::cout << "\n";
+        }
+    }
 	return 0;
 }

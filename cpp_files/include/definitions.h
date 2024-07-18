@@ -1,3 +1,6 @@
+#ifndef DEFINITIONS_H
+#define DEFINITIONS_H
+
 #define W 1
 #define G 2
 #define B 4
@@ -9,6 +12,7 @@ typedef struct {
 } point;
 
 typedef struct{
+    // Position v is unavailable at time t
     point v;
     int t;
 } Constraint_t;
@@ -16,5 +20,7 @@ typedef struct{
 typedef struct {
     point start;
     point goal;
-    std::list<std::pair<int, Constraint_t>> constraints;
+    std::list<Constraint_t> constraints;
 } Problem_t;
+
+#endif //DEFINITIONS_H

@@ -10,12 +10,14 @@ include_directories(${OpenCV_INCLUDE_DIRS})
 
 set(SOURCES
         src/AStar.cpp
+        src/ConflictTree.cpp
         src/main.cpp
         )
 
 set(HEADERS
         include/definitions.h
         include/AStar.h
+        include/ConflictTree.h
         )
 
 add_executable(ConflictBasedSearch ${SOURCES})

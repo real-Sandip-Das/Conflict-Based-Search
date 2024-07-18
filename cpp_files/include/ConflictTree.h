@@ -6,30 +6,45 @@
 #include <queue>
 #include <stack>
 #include <utility>
+#include <memory>
+#include <optional>
 #include "definitions.h"
-//TODO: add ConflictTree.h and ConflictTree.cpp to CMakeLists.txt
-typedef struct {
+
+typedef std::vector<std::list<point>> Solution_t;
+
+struct Conflict_t {
+    std::list<int> agents;
+    Constraint_t constraint;
+};
+
+struct CTree_Node {
+    explicit CTree_Node(double cost);
     std::list<std::pair<int, Constraint_t>> constraints;
-    std::vector<std::list<point>> solutions;
-    int cost;
-    CTree_Node* parent;
-    std::list<CTree_Node*> children_list;
-} CTree_Node;
-bool operator<(const CTree_Node*, const CTree_Node*);
+    Solution_t solution;
+    const double cost;
+    std::list<std::shared_ptr<CTree_Node>> children_list;
+};
+class CTree_Node_Comparator {
+public:
+    bool operator() (const std::shared_ptr<CTree_Node>&, const std::shared_ptr<CTree_Node>&);
+};
 
 class ConflictTree
 {
 private:
-    CTree_Node root;
+    std::shared_ptr<CTree_Node> root;
     int n_agents;
-    std::priority_queue<CTree_Node> pq;
+    std::priority_queue<std::shared_ptr<CTree_Node>, std::vector<std::shared_ptr<CTree_Node>>, CTree_Node_Comparator> pq;
 public:
-    ConflictTree(int, CTree_Node);
-    ~ConflictTree();
-    void add_node(CTree_Node*, CTree_Node);
+    ConflictTree(int, CTree_Node&);
+    ~ConflictTree() = default;
+    void add_node(const std::shared_ptr<CTree_Node>&, const CTree_Node&);
     bool is_empty();
-    CTree_Node* best_node();
-    std::pair<bool, Conflict_t> validate(CTree_Node*);
+    std::shared_ptr<CTree_Node> best_node();
+    static std::optional<Conflict_t> validate(const std::shared_ptr<CTree_Node>&);
 };
+
+//! Conflict Based Search
+std::optional<Solution_t> conflict_based_search(const std::vector<std::vector<int>>& map, const std::vector<point>& starts, const std::vector<point>& goals, int n_agents);
 
 #endif //CONFLICTTREE_H
