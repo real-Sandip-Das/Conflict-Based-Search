@@ -6,6 +6,6 @@
 #include "definitions.h"
 #include <opencv2/opencv.hpp>
 
-std::optional<std::pair<std::vector<std::vector<MapPixel>>, cv::Mat>> convert_map(int);
+std::optional<std::pair<std::vector<std::vector<MapPixel>>, cv::Mat>> convert_map(std::string);
 
 #endif //CONFLICTBASEDSEARCH_CONVERTMAP_H

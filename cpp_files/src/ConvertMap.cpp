@@ -2,11 +2,9 @@
 #include <fstream>
 #include <cstdio>
 
-std::optional<std::pair<std::vector<std::vector<MapPixel>>, cv::Mat>> convert_map(int i)
+std::optional<std::pair<std::vector<std::vector<MapPixel>>, cv::Mat>> convert_map(std::string map_path)
 {
-    std::vector<std::string> map_vec = {"brc202d.map", "den520d.map", "ost003d.map"};
-    std::string filename = "../../assets/" + map_vec[i - 1];
-    std::ifstream file(filename);
+    std::ifstream file(map_path);
     if (!file.is_open()) {
         std::cerr << "Unable to open file\n";
         return {};
@@ -20,7 +18,6 @@ std::optional<std::pair<std::vector<std::vector<MapPixel>>, cv::Mat>> convert_ma
     std::getline(file, line);
     std::sscanf(line.c_str(), "width %d", &width);
     std::getline(file, line);
-    width++;
     cv::Mat map_image(height, width, CV_8UC3);
     std::vector<std::vector<MapPixel>> map_arr(height, std::vector<MapPixel>(width));
 
