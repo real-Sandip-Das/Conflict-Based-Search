@@ -1,19 +1,27 @@
 # Conflict-Based-Search
 
-Implementation of Conflict Based Search
+Attempted implementation of the Conflict Based Search algorithm for MAPF(Multi Agent Path Finding)
 
-Structure of the Implementation(Description of each file that has some code in it):
+## Building
 
-Convert_Map.pyx, Convert_Maps.py: This is the first step, convert Maps in .map files into .npz file with a collection of numpy.ndarrays that describe the map in a way easier to deal with in the programs
+Building the project requires OpenCV Library and Headers preinstalled along with `g++` and `cmake`
 
-cpp_files/CMakeLists.txt: Please ignore this, this is only to make it easier to edit these files in a IDE/Text Editor with C++ support
+In a Linux based System, `build.sh` can be run to build the project
 
-cpp_files/include/definitions.h: some basic #defines and typedefs to use throughout the implementation
+```sh
+sh build.sh
+```
 
-cpp_files/include/AStar.h, cpp_files/src/AStar.cpp: The Implementation of the low-level individual Path Finding algorithm(i.e. A\* in this case)
+## Running
 
-A_Star.pyx, A_Star.py: Files intended to test the A\* Implementation on individual agents
+It's necessary to run the executable from the right directory relative to the `assets` directory
 
-## Why was everything in the C++ part kept in a separate namespace?
+`run.sh` takes care of that:
 
-This was done to keep the original definitions(e.g. of classes or functions) from the C++ source files separate from the definitions coming from the Cython counterpart. Without this, the complier would refuse to compile due to multiple definitions of the same thing
+```sh
+sh run.sh
+```
+
+Note:
+
+- Depending on the number of agents to be solved for, the program may take a lot of time to run (around 10-15 agents at a time runs fine on my setup)
