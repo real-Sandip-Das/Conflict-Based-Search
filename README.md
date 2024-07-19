@@ -16,4 +16,4 @@ A_Star.pyx, A_Star.py: Files intended to test the A\* Implementation on individu
 
 ## Why was everything in the C++ part kept in a separate namespace?
 
-    This was done to keep the original definitions(e.g. of classes or functions) from the C++ source files separate from the definitions coming from the Cython counterpart. Without this, the complier would refuse to compile due to multiple definitions of the same thing
+This was done to keep the original definitions(e.g. of classes or functions) from the C++ source files separate from the definitions coming from the Cython counterpart. Without this, the complier would refuse to compile due to multiple definitions of the same thing
