@@ -15,18 +15,18 @@ An implementation of the Conflict Based Search algorithm for MAPF(Multi Agent Pa
    ~/vcpkg/bootstrap-vcpkg.sh
    ```
 
-2. Building from the `cpp_files` directory:
+2. Building the C++ source code:
 
    ```sh
-   cd cpp_files
-   cmake -B build -S . -DCMAKE_TOOLCHAIN_FILE=~/vcpkg/scripts/buildsystems/vcpkg.cmake -GNinja
-   cmake --build build
+   sh build.sh
    ```
+
+   > **Note:** `build.sh` assumes by default that `vcpkg` is installed at `~/vcpkg`. If you installed `vcpkg` in a different directory, you can either set the `VCPKG_ROOT` environment variable (`export VCPKG_ROOT=/path/to/vcpkg`) before running the script, or manually edit `build.sh` to update the path.
 
 3. Run the tests:
 
    ```sh
-   ./build/cbs_tests
+   ./cpp_files/cmake-build-debug/cbs_tests
    ```
 
 ## Using Docker
@@ -37,10 +37,10 @@ An implementation of the Conflict Based Search algorithm for MAPF(Multi Agent Pa
    docker build -t cbs-project .
    ```
 
-2. Running the interactive executable:
+2. Running the planner:
 
    ```sh
-   docker run -it cbs-project /bin/sh -c "cd cpp_files/build && ./ConflictBasedSearch"
+   docker run -it cbs-project /bin/sh -c "cd cpp_files/cmake-build-debug && ./ConflictBasedSearch"
    ```
 
 ## Running the Visualizer

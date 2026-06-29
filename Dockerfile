@@ -16,11 +16,10 @@ RUN apt-get update && apt-get install -y \
 RUN git clone https://github.com/microsoft/vcpkg.git /vcpkg \
     && /vcpkg/bootstrap-vcpkg.sh
 
+ENV VCPKG_ROOT=/vcpkg
 WORKDIR /app
 COPY . /app
 
-RUN cd cpp_files \
-    && cmake -B build -S . -DCMAKE_TOOLCHAIN_FILE=/vcpkg/scripts/buildsystems/vcpkg.cmake -GNinja \
-    && cmake --build build
+RUN sh build.sh
 
-CMD ["/bin/sh", "-c", "cd cpp_files/build && ./cbs_tests && ./ConflictBasedSearch"]
+CMD ["/bin/sh", "-c", "cd cpp_files/cmake-build-debug && ./cbs_tests && ./ConflictBasedSearch"]
