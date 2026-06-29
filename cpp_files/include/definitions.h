@@ -6,7 +6,7 @@
 #define SCALE 2
 #include <list>
 
-enum class MapPixel {W, G, B};
+using MapPixel = char;
 
 typedef struct {
     int x;

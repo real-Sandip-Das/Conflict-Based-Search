@@ -4,8 +4,10 @@
 #define CONFLICTBASEDSEARCH_CONVERTMAP_H
 
 #include "definitions.h"
-#include <opencv2/opencv.hpp>
+#include <vector>
+#include <string>
+#include <optional>
 
-std::optional<std::pair<std::vector<std::vector<MapPixel>>, cv::Mat>> convert_map(std::string);
+std::optional<std::vector<std::vector<MapPixel>>> convert_map(std::string);
 
 #endif //CONFLICTBASEDSEARCH_CONVERTMAP_H

@@ -1,15 +1,11 @@
-#include <opencv2/opencv.hpp>
+#include <fstream>
+#include <iostream>
+#include <sstream>
 #include "../include/ConvertMap.h"
 #include "../include/AStar.h"
 #include "../include/ConflictTree.h"
 
-using namespace cv;
-
-// The purpose of this file is to debug the A* implementation
-
 void read_scenario(const std::string&, const std::string&, std::vector<point>&, std::vector<point>&, int&);
-
-void visualize_solution(const Mat&, const std::string&, const Solution_t&);
 
 int main()
 {
@@ -24,9 +20,7 @@ int main()
     }
     std::string map_name = map_vec[map_no - 1];
     std::string map_path = assets_path + map_name + ".map";
-	Mat map_image;
-    std::vector<std::vector<MapPixel>> map_arr;
-    std::tie(map_arr, map_image)  = convert_map(map_path).value();
+    std::vector<std::vector<MapPixel>> map_arr = convert_map(map_path).value();
 
     /*
 	std::vector<std::vector<MapPixel>> map_arr = {
@@ -43,13 +37,42 @@ int main()
     read_scenario(assets_path, map_name, starts, goals, n_agents);
     auto solution = conflict_based_search(map_arr, starts, goals, n_agents);
     if (solution.has_value()) {
-        for (auto& agent_solution: solution.value()) {
-            for (auto& path_point: agent_solution) {
-                std::cout << "{" << path_point.x << ", " << path_point.y << "} ";
+        std::ofstream json_file("../../visualizer/solution.json");
+        json_file << "{\n";
+        json_file << "  \"map\": [\n";
+        for (size_t i = 0; i < map_arr.size(); ++i) {
+            json_file << "    \"";
+            for (size_t j = 0; j < map_arr[i].size(); ++j) {
+                json_file << map_arr[i][j];
             }
-            std::cout << "\n";
+            json_file << "\"" << (i == map_arr.size() - 1 ? "" : ",") << "\n";
         }
-        visualize_solution(map_image, "Conflict Based Search (visualization of solution)", solution.value());
+        json_file << "  ],\n";
+        json_file << "  \"starts\": [";
+        for (size_t i = 0; i < starts.size(); ++i) {
+            json_file << "{\"x\":" << starts[i].x << ",\"y\":" << starts[i].y << "}" << (i == starts.size() - 1 ? "" : ",");
+        }
+        json_file << "],\n";
+        json_file << "  \"goals\": [";
+        for (size_t i = 0; i < goals.size(); ++i) {
+            json_file << "{\"x\":" << goals[i].x << ",\"y\":" << goals[i].y << "}" << (i == goals.size() - 1 ? "" : ",");
+        }
+        json_file << "],\n";
+        json_file << "  \"solution\": [\n";
+        for (size_t i = 0; i < solution.value().size(); ++i) {
+            json_file << "    [";
+            auto& agent_solution = solution.value()[i];
+            size_t pt_idx = 0;
+            for (auto& path_point : agent_solution) {
+                json_file << "{\"x\":" << path_point.x << ",\"y\":" << path_point.y << "}" << (pt_idx == agent_solution.size() - 1 ? "" : ",");
+                pt_idx++;
+            }
+            json_file << "]" << (i == solution.value().size() - 1 ? "" : ",") << "\n";
+        }
+        json_file << "  ]\n";
+        json_file << "}\n";
+        json_file.close();
+        std::cout << "Successfully written solution to solution.json\n";
     } else {
         std::cout << "No Solution for the given MAPF problem could be found" << std::endl;
     }
@@ -97,50 +120,3 @@ void read_scenario(const std::string& assets_path, const std::string& map_name, 
     }
 }
 
-void visualize_solution(const Mat& map_image_original, const std::string& window_name, const Solution_t& solution)
-{
-    namedWindow(window_name, WINDOW_NORMAL);
-
-    // Map with full paths of individual agents in Blue
-    cv::Mat map_with_paths;
-
-    // Drawing each agent at different times
-    cv::Mat visualization_window;
-    bool end_of_solution = false;
-    bool first_iteration = true;
-    int time = 0;
-    std::vector<std::list<point>::const_iterator> l_it_vec;
-    while (true) {
-        if (end_of_solution || first_iteration) {
-            map_image_original.copyTo(map_with_paths);
-            l_it_vec.clear();
-            for (auto &agent_solution: solution)
-                l_it_vec.push_back(agent_solution.begin());
-            first_iteration = false;
-        }
-
-        map_with_paths.copyTo(visualization_window);
-        for (auto l_it: l_it_vec) {
-            int x = l_it->x, y = l_it->y;
-            map_with_paths.at<cv::Vec3b>(y, x) = cv::Vec3b(255, 0, 0);
-            visualization_window.at<cv::Vec3b>(y, x) = cv::Vec3b(0, 0, 255);
-        }
-
-        if (!visualization_window.data) {
-            std::cerr << "No Image data" << std::endl;
-            break;
-        }
-        imshow(window_name, visualization_window);
-        if (waitKey(10) != -1) break;// 100 fps
-
-        time++;
-        end_of_solution = true;
-        for (int i = 0; i < static_cast<int>(l_it_vec.size()); i++) {
-            l_it_vec[i]++;
-            if (l_it_vec[i] == solution[i].end()) {
-                l_it_vec[i]--;
-            } else end_of_solution = false;
-        }
-    }
-    destroyAllWindows();
-}

@@ -1,0 +1,22 @@
+body {
+    font-family: sans-serif;
+    text-align: center;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 20px;
+}
+
+canvas {
+    background-color: white;
+    border: 2px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    
+    /* Auto-scale the canvas to fit the screen */
+    max-width: 90vw;
+    max-height: 80vh;
+    width: auto;
+    height: auto;
+    
+    /* Prevent the browser from blurring the 1-pixel cells when scaled up! */
+    image-rendering: pixelated; 
+}

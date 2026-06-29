@@ -91,7 +91,8 @@ bool AStarGraph::not_constrained(point a, int t) {
 
 bool AStarGraph::is_reachable(point a, int t) {
     if (0 <= a.x && a.x < width && 0 <= a.y && a.y < height) {
-        if (map_arr[a.y][a.x] == MapPixel::W) {
+        char p = map_arr[a.y][a.x];
+        if (p == '.' || p == 'G' || p == 'S') {
             if (not_constrained(a, t)) {
                 return true;
             }
