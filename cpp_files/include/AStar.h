@@ -8,6 +8,10 @@
 #include <utility>
 #include <list>
 
+/**
+ * @brief Standard A* search wrapper because single-agent pathfinding is
+ * apparently too hard to write inline.
+ */
 class AStarGraph
 {
 private:
@@ -25,6 +29,10 @@ private:
     bool is_reachable(point, int);
     std::vector<std::tuple<point, double, double>> find_neighbours(point, int);
 public:
+    /**
+     * @brief Computes the optimal path. Pray that the heuristic is admissible.
+     * @return Pair of path points and total cost (if it ever returns).
+     */
     std::pair<std::list<point>, double> optimal_path();
 
     AStarGraph(const std::vector<std::vector<MapPixel>>& given_map_arr, const Problem_t& problem) :

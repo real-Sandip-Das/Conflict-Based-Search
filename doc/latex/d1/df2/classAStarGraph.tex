@@ -1,0 +1,44 @@
+\doxysection{AStar\+Graph Class Reference}
+\hypertarget{classAStarGraph}{}\label{classAStarGraph}\index{AStarGraph@{AStarGraph}}
+
+
+Standard A\texorpdfstring{$\ast$}{*} search wrapper because single-\/agent pathfinding is apparently too hard to write inline.  
+
+
+
+
+{\ttfamily \#include $<$AStar.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::pair$<$ std\+::list$<$ \mbox{\hyperlink{structpoint}{point}} $>$, double $>$ \mbox{\hyperlink{classAStarGraph_a67db28c9c5f0a2db34904b9fade1aa50}{optimal\+\_\+path}} ()
+\begin{DoxyCompactList}\small\item\em Computes the optimal path. Pray that the heuristic is admissible. \end{DoxyCompactList}\item 
+\Hypertarget{classAStarGraph_a5a5c5c42fd64485ecfb8ef58170f43ce}\label{classAStarGraph_a5a5c5c42fd64485ecfb8ef58170f43ce} 
+{\bfseries AStar\+Graph} (const std\+::vector$<$ std\+::vector$<$ Map\+Pixel $>$ $>$ \&given\+\_\+map\+\_\+arr, const \mbox{\hyperlink{structProblem__t}{Problem\+\_\+t}} \&problem)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Standard A\texorpdfstring{$\ast$}{*} search wrapper because single-\/agent pathfinding is apparently too hard to write inline. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classAStarGraph_a67db28c9c5f0a2db34904b9fade1aa50}\label{classAStarGraph_a67db28c9c5f0a2db34904b9fade1aa50} 
+\index{AStarGraph@{AStarGraph}!optimal\_path@{optimal\_path}}
+\index{optimal\_path@{optimal\_path}!AStarGraph@{AStarGraph}}
+\doxysubsubsection{\texorpdfstring{optimal\_path()}{optimal\_path()}}
+{\footnotesize\ttfamily std\+::pair$<$ std\+::list$<$ \mbox{\hyperlink{structpoint}{point}} $>$, double $>$ AStar\+Graph\+::optimal\+\_\+path (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Computes the optimal path. Pray that the heuristic is admissible. 
+
+\begin{DoxyReturn}{Returns}
+Pair of path points and total cost (if it ever returns). 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+cpp\+\_\+files/include/AStar.\+h\item 
+cpp\+\_\+files/src/AStar.\+cpp\end{DoxyCompactItemize}

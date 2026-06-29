@@ -50,6 +50,19 @@ An implementation of the Conflict Based Search algorithm for MAPF(Multi Agent Pa
    docker run --rm cbs-project /bin/sh -c "cd cpp_files/cmake-build-debug && ./cbs_tests"
    ```
 
+## Generating Documentation
+
+Doxygen configuration is given in the `Doxyfile` to generate documentation from the C++ source files.
+
+To generate the documentation locally:
+
+1. Ensure `doxygen` and `graphviz` are installed (e.g., `sudo apt install doxygen graphviz` on Debian/Ubuntu).
+2. Run Doxygen from the repository root:
+   ```sh
+   doxygen Doxyfile
+   ```
+3. Open `doc/html/index.html` in your web browser to view the generated docs.
+
 ## Running the Visualizer locally
 
 After getting the `solution.json` file using the `ConflictBasedSearch` executable, you can visualize the paths in your browser.

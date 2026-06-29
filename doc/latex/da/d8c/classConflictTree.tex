@@ -1,0 +1,41 @@
+\doxysection{Conflict\+Tree Class Reference}
+\hypertarget{classConflictTree}{}\label{classConflictTree}\index{ConflictTree@{ConflictTree}}
+
+
+High-\/level conflict tree tracker. Resolves collisions by spawning child nodes until we run out of RAM.  
+
+
+
+
+{\ttfamily \#include $<$Conflict\+Tree.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classConflictTree_a9edcbb248ca416312b556e48e894cc91}\label{classConflictTree_a9edcbb248ca416312b556e48e894cc91} 
+{\bfseries Conflict\+Tree} (int, \mbox{\hyperlink{structCTree__Node}{CTree\+\_\+\+Node}} \&)
+\item 
+\Hypertarget{classConflictTree_af395bebec71063ed650299d238db1cde}\label{classConflictTree_af395bebec71063ed650299d238db1cde} 
+void {\bfseries add\+\_\+node} (const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{structCTree__Node}{CTree\+\_\+\+Node}} $>$ \&, const \mbox{\hyperlink{structCTree__Node}{CTree\+\_\+\+Node}} \&)
+\item 
+\Hypertarget{classConflictTree_acf3e3280dd555bcb33d3d31fb3971a11}\label{classConflictTree_acf3e3280dd555bcb33d3d31fb3971a11} 
+bool {\bfseries is\+\_\+empty} ()
+\item 
+\Hypertarget{classConflictTree_a87ca25e8c0e228bac144667a408ae5e5}\label{classConflictTree_a87ca25e8c0e228bac144667a408ae5e5} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{structCTree__Node}{CTree\+\_\+\+Node}} $>$ {\bfseries best\+\_\+node} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classConflictTree_af40937f378792ba06251bc7fcbee8444}\label{classConflictTree_af40937f378792ba06251bc7fcbee8444} 
+static std\+::optional$<$ \mbox{\hyperlink{structConflict__t}{Conflict\+\_\+t}} $>$ {\bfseries validate} (const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{structCTree__Node}{CTree\+\_\+\+Node}} $>$ \&)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+High-\/level conflict tree tracker. Resolves collisions by spawning child nodes until we run out of RAM. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+cpp\+\_\+files/include/Conflict\+Tree.\+h\item 
+cpp\+\_\+files/src/Conflict\+Tree.\+cpp\end{DoxyCompactItemize}

@@ -11,7 +11,8 @@ RUN apt-get update && apt-get install -y \
     zip \
     unzip \
     tar \
-    pkg-config
+    pkg-config \
+    doxygen
 
 RUN git clone https://github.com/microsoft/vcpkg.git /vcpkg --depth 1 \
     && /vcpkg/bootstrap-vcpkg.sh

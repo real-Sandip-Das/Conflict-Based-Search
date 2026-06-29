@@ -1,0 +1,49 @@
+\doxysection{AStar.\+h}
+\hypertarget{AStar_8h_source}{}\label{AStar_8h_source}\index{cpp\_files/include/AStar.h@{cpp\_files/include/AStar.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#ifndef\ ASTAR\_H}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#define\ ASTAR\_H}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}definitions.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <utility>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <list>}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classAStarGraph}{AStarGraph}}}
+\DoxyCodeLine{00016\ \{}
+\DoxyCodeLine{00017\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::vector<MapPixel>>\&\ map\_arr;}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{int}\ height;}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{int}\ width;}
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{structpoint}{point}}\ start,\ goal;}
+\DoxyCodeLine{00022\ \ \ \ \ std::list<Constraint\_t>\ constraints;}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{comment}{//for\ storing\ values\ of\ teh\ heuristic\ function}}
+\DoxyCodeLine{00025\ \ \ \ \ std::vector<std::vector<bool>>\ h\_calculated;}
+\DoxyCodeLine{00026\ \ \ \ \ std::vector<std::vector<double>>\ h\_vec;}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{double}\ h(\mbox{\hyperlink{structpoint}{point}});}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{bool}\ not\_constrained(\mbox{\hyperlink{structpoint}{point}},\ \textcolor{keywordtype}{int});}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{bool}\ is\_reachable(\mbox{\hyperlink{structpoint}{point}},\ \textcolor{keywordtype}{int});}
+\DoxyCodeLine{00030\ \ \ \ \ std::vector<std::tuple<point,\ double,\ double>>\ find\_neighbours(\mbox{\hyperlink{structpoint}{point}},\ \textcolor{keywordtype}{int});}
+\DoxyCodeLine{00031\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00036\ \ \ \ \ std::pair<std::list<point>,\ \textcolor{keywordtype}{double}>\ \mbox{\hyperlink{classAStarGraph_a67db28c9c5f0a2db34904b9fade1aa50}{optimal\_path}}();}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \mbox{\hyperlink{classAStarGraph}{AStarGraph}}(\textcolor{keyword}{const}\ std::vector<std::vector<MapPixel>>\&\ given\_map\_arr,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structProblem__t}{Problem\_t}}\&\ problem)\ :}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ map\_arr(given\_map\_arr),\ start(problem.start),\ goal(problem.goal)}
+\DoxyCodeLine{00040\ \ \ \ \ \{}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ height\ =\ map\_arr.size();}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ width\ =\ map\_arr[0].size();}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ constraints\ =\ problem.constraints;}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ h\_calculated.resize(height,\ std::vector<bool>(width,\ \textcolor{keyword}{false}));}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ h\_vec.resize(height,\ std::vector<double>(width));}
+\DoxyCodeLine{00046\ \ \ \ \ \}}
+\DoxyCodeLine{00047\ \};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ std::pair<std::list<std::pair<int,\ int>>,\ \textcolor{keywordtype}{double}>\ a\_star(\textcolor{keyword}{const}\ std::vector<std::vector<MapPixel>>\&,\ \textcolor{keywordtype}{int},\ \textcolor{keywordtype}{int},\ \textcolor{keywordtype}{int},\ \textcolor{keywordtype}{int});\ \textcolor{comment}{//for\ testing\ the\ A*\ implementation\ on\ individual\ agents}}
+\DoxyCodeLine{00050\ std::pair<std::list<point>,\ \textcolor{keywordtype}{double}>\ low\_level(\textcolor{keyword}{const}\ std::vector<std::vector<MapPixel>>\&,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structProblem__t}{Problem\_t}}\&);\ \textcolor{comment}{//\ for\ use\ in\ the\ Conflict\ Based\ Search\ Algorithm}}
+\DoxyCodeLine{00051\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//ASTAR\_H}}
+
+\end{DoxyCode}

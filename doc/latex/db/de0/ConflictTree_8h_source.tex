@@ -1,0 +1,57 @@
+\doxysection{Conflict\+Tree.\+h}
+\hypertarget{ConflictTree_8h_source}{}\label{ConflictTree_8h_source}\index{cpp\_files/include/ConflictTree.h@{cpp\_files/include/ConflictTree.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#ifndef\ CONFLICTTREE\_H}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#define\ CONFLICTTREE\_H}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <list>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <queue>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <stack>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <utility>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <optional>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}definitions.h"{}}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{typedef}\ std::vector<std::list<point>>\ Solution\_t;}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structConflict__t}{Conflict\_t}}\ \{}
+\DoxyCodeLine{00018\ \ \ \ \ std::list<int>\ agents;}
+\DoxyCodeLine{00019\ \ \ \ \ \mbox{\hyperlink{structConstraint__t}{Constraint\_t}}\ constraint;}
+\DoxyCodeLine{00020\ \};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structCTree__Node}{CTree\_Node}}\ \{}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{structCTree__Node}{CTree\_Node}}(\textcolor{keywordtype}{double}\ cost);}
+\DoxyCodeLine{00024\ \ \ \ \ std::list<std::pair<int,\ Constraint\_t>>\ constraints;}
+\DoxyCodeLine{00025\ \ \ \ \ Solution\_t\ solution;}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ cost;}
+\DoxyCodeLine{00027\ \ \ \ \ std::list<std::shared\_ptr<CTree\_Node>>\ children\_list;}
+\DoxyCodeLine{00028\ \};}
+\DoxyCodeLine{00029\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classCTree__Node__Comparator}{CTree\_Node\_Comparator}}\ \{}
+\DoxyCodeLine{00030\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{bool}\ operator()\ (\textcolor{keyword}{const}\ std::shared\_ptr<CTree\_Node>\&,\ \textcolor{keyword}{const}\ std::shared\_ptr<CTree\_Node>\&);}
+\DoxyCodeLine{00032\ \};}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00038\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classConflictTree}{ConflictTree}}}
+\DoxyCodeLine{00039\ \{}
+\DoxyCodeLine{00040\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00041\ \ \ \ \ std::shared\_ptr<CTree\_Node>\ root;}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{int}\ n\_agents;}
+\DoxyCodeLine{00043\ \ \ \ \ std::priority\_queue<std::shared\_ptr<CTree\_Node>,\ std::vector<std::shared\_ptr<CTree\_Node>>,\ \mbox{\hyperlink{classCTree__Node__Comparator}{CTree\_Node\_Comparator}}>\ pq;}
+\DoxyCodeLine{00044\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00045\ \ \ \ \ \mbox{\hyperlink{classConflictTree}{ConflictTree}}(\textcolor{keywordtype}{int},\ \mbox{\hyperlink{structCTree__Node}{CTree\_Node}}\&);}
+\DoxyCodeLine{00046\ \ \ \ \ \mbox{\hyperlink{classConflictTree}{\string~ConflictTree}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{void}\ add\_node(\textcolor{keyword}{const}\ std::shared\_ptr<CTree\_Node>\&,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structCTree__Node}{CTree\_Node}}\&);}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{bool}\ is\_empty();}
+\DoxyCodeLine{00049\ \ \ \ \ std::shared\_ptr<CTree\_Node>\ best\_node();}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keyword}{static}\ std::optional<Conflict\_t>\ validate(\textcolor{keyword}{const}\ std::shared\_ptr<CTree\_Node>\&);}
+\DoxyCodeLine{00051\ \};}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00061\ std::optional<Solution\_t>\ conflict\_based\_search(\textcolor{keyword}{const}\ std::vector<std::vector<MapPixel>>\&\ map,\ \textcolor{keyword}{const}\ std::vector<point>\&\ starts,\ \textcolor{keyword}{const}\ std::vector<point>\&\ goals,\ \textcolor{keywordtype}{int}\ n\_agents);}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//CONFLICTTREE\_H}}
+
+\end{DoxyCode}

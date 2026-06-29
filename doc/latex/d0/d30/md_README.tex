@@ -1,0 +1,124 @@
+\chapter{Conflict-\/\+Based-\/\+Search}
+\hypertarget{md_README}{}\label{md_README}\index{Conflict-\/Based-\/Search@{Conflict-\/Based-\/Search}}
+\label{md_README_autotoc_md0}%
+\Hypertarget{md_README_autotoc_md0}%
+ An implementation of the Conflict Based Search algorithm for MAPF(\+Multi Agent Path Finding) with a web visualizer.
+
+
+
+\texorpdfstring{$>$}{>}Note\+: The visualizer can be run without compiling because it already contains a {\ttfamily solution.\+json}\hypertarget{md_README_autotoc_md1}{}\doxysection{\texorpdfstring{Local Setup}{Local Setup}}\label{md_README_autotoc_md1}
+
+\begin{DoxyEnumerate}
+\item Install {\ttfamily vcpkg} (e.\+g., at {\ttfamily \texorpdfstring{$\sim$}{\string~}/vcpkg})\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{git\ clone\ https://github.com/microsoft/vcpkg.git\ \string~/vcpkg}
+\DoxyCodeLine{\string~/vcpkg/bootstrap-\/vcpkg.sh}
+
+\end{DoxyCode}
+
+\item Building the C++ source code\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{sh\ build.sh}
+
+\end{DoxyCode}
+
+\end{DoxyEnumerate}
+
+\begin{quote}
+{\bfseries{Note\+:}} {\ttfamily build.\+sh} assumes by default that {\ttfamily vcpkg} is installed at {\ttfamily \texorpdfstring{$\sim$}{\string~}/vcpkg}. If you installed {\ttfamily vcpkg} in a different directory, you can either set the {\ttfamily VCPKG\+\_\+\+ROOT} environment variable ({\ttfamily export VCPKG\+\_\+\+ROOT=/path/to/vcpkg}) before running the script, or manually edit {\ttfamily build.\+sh} to update the path. \end{quote}
+
+\begin{DoxyEnumerate}
+\item Run the tests\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{./cpp\_files/cmake-\/build-\/debug/cbs\_tests}
+
+\end{DoxyCode}
+
+\end{DoxyEnumerate}\hypertarget{md_README_autotoc_md2}{}\doxysection{\texorpdfstring{Using Docker Compose}{Using Docker Compose}}\label{md_README_autotoc_md2}
+
+\begin{DoxyEnumerate}
+\item Build and start the visualizer in the background\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{docker\ compose\ up\ -\/d\ visualizer}
+
+\end{DoxyCode}
+
+\item Running the planner\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{docker\ compose\ run\ -\/-\/rm\ solver}
+
+\end{DoxyCode}
+
+\item Running the tests (optional)\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{docker\ build\ -\/t\ cbs-\/project\ .}
+\DoxyCodeLine{docker\ run\ -\/-\/rm\ cbs-\/project\ /bin/sh\ -\/c\ "{}cd\ cpp\_files/cmake-\/build-\/debug\ \&\&\ ./cbs\_tests"{}}
+
+\end{DoxyCode}
+
+\end{DoxyEnumerate}\hypertarget{md_README_autotoc_md3}{}\doxysection{\texorpdfstring{Generating Documentation}{Generating Documentation}}\label{md_README_autotoc_md3}
+Doxygen configuration is provided in the {\ttfamily Doxyfile} to generate HTML API documentation from the annotated C++ source files.
+
+To generate the documentation locally\+:
+
+
+\begin{DoxyEnumerate}
+\item Ensure {\ttfamily doxygen} is installed (e.\+g., {\ttfamily sudo apt install doxygen} on Debian/\+Ubuntu).
+\item Run Doxygen from the repository root\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{doxygen\ Doxyfile}
+
+\end{DoxyCode}
+
+\item Open {\ttfamily doc/html/index.\+html} in your web browser to view the generated docs.
+\end{DoxyEnumerate}\hypertarget{md_README_autotoc_md4}{}\doxysection{\texorpdfstring{Running the Visualizer locally}{Running the Visualizer locally}}\label{md_README_autotoc_md4}
+After getting the {\ttfamily solution.\+json} file using the {\ttfamily Conflict\+Based\+Search} executable, you can visualize the paths in your browser.
+
+
+\begin{DoxyEnumerate}
+\item Start a local server\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd\ visualizer}
+\DoxyCodeLine{python3\ -\/m\ http.server\ 8080}
+
+\end{DoxyCode}
+
+\item Open your web browser and go to {\ttfamily \href{http://localhost:8080}{\texttt{ http\+://localhost\+:8080}}}.
+\end{DoxyEnumerate}\hypertarget{md_README_autotoc_md5}{}\doxysection{\texorpdfstring{Benchmarks}{Benchmarks}}\label{md_README_autotoc_md5}
+The path planner was benchmarked using the test in {\ttfamily test\+\_\+benchmark.\+cpp}.
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Number of Agents   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Execution Time   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Status    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Number of Agents   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Execution Time   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Status    }\\\cline{1-3}
+\endhead
+\PBS\centering 1   &\PBS\centering 10 ms   &\PBS\centering Optimal Path Found    \\\cline{1-3}
+\PBS\centering 2   &\PBS\centering 9 ms   &\PBS\centering Optimal Path Found    \\\cline{1-3}
+\PBS\centering 3   &\PBS\centering 11 ms   &\PBS\centering Optimal Path Found    \\\cline{1-3}
+\PBS\centering 5   &\PBS\centering 18 ms   &\PBS\centering Optimal Path Found    \\\cline{1-3}
+\PBS\centering 8   &\PBS\centering 29 ms   &\PBS\centering Optimal Path Found    \\\cline{1-3}
+\PBS\centering 10   &\PBS\centering 36 ms   &\PBS\centering Optimal Path Found    \\\cline{1-3}
+\PBS\centering 12   &\PBS\centering 397 ms   &\PBS\centering Optimal Path Found    \\\cline{1-3}
+\PBS\centering 15   &\PBS\centering 498 ms   &\PBS\centering Optimal Path Found    \\\cline{1-3}
+\PBS\centering 20   &\PBS\centering 1115 ms   &\PBS\centering Optimal Path Found    \\\cline{1-3}
+\PBS\centering 25   &\PBS\centering Timeout (\texorpdfstring{$>$}{>} 4 min)   &\PBS\centering Conflict space too dense   \\\cline{1-3}
+\end{longtabu}

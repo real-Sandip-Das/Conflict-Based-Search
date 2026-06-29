@@ -31,6 +31,10 @@ public:
     bool operator() (const std::shared_ptr<CTree_Node>&, const std::shared_ptr<CTree_Node>&);
 };
 
+/**
+ * @brief High-level conflict tree tracker. Resolves collisions by spawning
+ * child nodes until we run out of RAM.
+ */
 class ConflictTree
 {
 private:
@@ -46,7 +50,14 @@ public:
     static std::optional<Conflict_t> validate(const std::shared_ptr<CTree_Node>&);
 };
 
-//! Conflict Based Search
+/**
+ * @brief The main MAPF solver. Prepare to wait if you pass more than 15 agents.
+ * @param map The map grid.
+ * @param starts Start locations of the agents.
+ * @param goals Goal locations of the agents.
+ * @param n_agents Number of agents (keep this small, seriously).
+ * @return Solution paths or nullopt if we hit an infinite loop or impossible map.
+ */
 std::optional<Solution_t> conflict_based_search(const std::vector<std::vector<MapPixel>>& map, const std::vector<point>& starts, const std::vector<point>& goals, int n_agents);
 
 #endif //CONFLICTTREE_H

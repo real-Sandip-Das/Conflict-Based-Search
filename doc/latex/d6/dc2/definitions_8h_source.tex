@@ -1,0 +1,34 @@
+\doxysection{definitions.\+h}
+\hypertarget{definitions_8h_source}{}\label{definitions_8h_source}\index{cpp\_files/include/definitions.h@{cpp\_files/include/definitions.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#ifndef\ DEFINITIONS\_H}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#define\ DEFINITIONS\_H}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ SCALE\ 2}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <list>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{using\ }MapPixel\ =\ char;}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keywordtype}{int}\ x;}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keywordtype}{int}\ y;}
+\DoxyCodeLine{00014\ \}\ \mbox{\hyperlink{structpoint}{point}};}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}\{}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{comment}{//\ Position\ v\ is\ unavailable\ at\ time\ t}}
+\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{structpoint}{point}}\ v;}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{int}\ t;}
+\DoxyCodeLine{00020\ \}\ \mbox{\hyperlink{structConstraint__t}{Constraint\_t}};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{structpoint}{point}}\ start;}
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{structpoint}{point}}\ goal;}
+\DoxyCodeLine{00025\ \ \ \ \ std::list<Constraint\_t>\ constraints;}
+\DoxyCodeLine{00026\ \}\ \mbox{\hyperlink{structProblem__t}{Problem\_t}};}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//DEFINITIONS\_H}}
+
+\end{DoxyCode}
