@@ -20,5 +20,15 @@ set(HEADERS
         )
 
 add_executable(ConflictBasedSearch ${SOURCES})
-
 target_include_directories(ConflictBasedSearch PUBLIC include)
+
+find_package(GTest CONFIG REQUIRED)
+add_executable(cbs_tests
+        tests/test_convertmap.cpp
+        tests/test_benchmark.cpp
+        src/ConvertMap.cpp
+        src/AStar.cpp
+        src/ConflictTree.cpp
+)
+target_include_directories(cbs_tests PUBLIC include)
+target_link_libraries(cbs_tests PRIVATE GTest::gtest GTest::gtest_main)

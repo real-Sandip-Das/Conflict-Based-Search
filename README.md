@@ -1,38 +1,66 @@
 # Conflict-Based-Search
 
-Attempted implementation of the Conflict Based Search algorithm for MAPF(Multi Agent Path Finding)
+An implementation of the Conflict Based Search algorithm for MAPF(Multi Agent Path Finding) with a web visualizer.
 
 ![Example visualization](output.gif)
 
-## Building
+>Note: The visualizer can be run without compiling because it already contains a `solution.json`
 
-Building the project requires OpenCV Library and Headers preinstalled along with `g++` and `cmake`
+## Local Setup
 
-In a Linux based System, `build.sh` can be run to build the project
+1. Install `vcpkg` (e.g., at `~/vcpkg`):
 
-```sh
-sh build.sh
-```
+   ```sh
+   git clone https://github.com/microsoft/vcpkg.git ~/vcpkg
+   ~/vcpkg/bootstrap-vcpkg.sh
+   ```
 
-## Running
+2. Building from the `cpp_files` directory:
 
-It's necessary to run the executable from the right directory relative to the `assets` directory
+   ```sh
+   cd cpp_files
+   cmake -B build -S . -DCMAKE_TOOLCHAIN_FILE=~/vcpkg/scripts/buildsystems/vcpkg.cmake -GNinja
+   cmake --build build
+   ```
 
-`run.sh` takes care of that:
+3. Run the tests:
 
-```sh
-sh run.sh
-cd visualizer
-python3 -m http.server 8080
-```
+   ```sh
+   ./build/cbs_tests
+   ```
 
-The visualizer directory already contains an output from the solver to be visualized.
+## Using Docker
+
+1. Building the Docker image:
+
+   ```sh
+   docker build -t cbs-project .
+   ```
+
+2. Running the interactive executable:
+
+   ```sh
+   docker run -it cbs-project /bin/sh -c "cd cpp_files/build && ./ConflictBasedSearch"
+   ```
+
+## Running the Visualizer
+
+After getting the `solution.json` file using the `ConflictBasedSearch` executable, you can view the paths rendered in your browser.
+
+1. Start a local server:
+
+   ```sh
+   cd visualizer
+   python3 -m http.server 8080
+   ```
+
+2. Open your web browser and go to `http://localhost:8080`.
 
 ## Benchmarks
 
-The solver was benchmarked on the `ost003d` map using a random scenario:
+The path planner was benchmarked on the `ost003d` map using a random scenario:
 
-| Number of Agents | Solver Execution Time | Status |
+| Number of Agents | Execution Time | Status |
 | :---: | :---: | :---: |
 | 1 | 3 ms | Optimal Path Found |
 | 2 | 5 ms | Optimal Path Found |
