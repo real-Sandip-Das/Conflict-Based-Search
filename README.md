@@ -29,23 +29,30 @@ An implementation of the Conflict Based Search algorithm for MAPF(Multi Agent Pa
    ./cpp_files/cmake-build-debug/cbs_tests
    ```
 
-## Using Docker
+## Using Docker Compose
 
-1. Building the Docker image:
+1. Build and start the visualizer in the background:
 
    ```sh
-   docker build -t cbs-project .
+   docker compose up -d visualizer
    ```
 
 2. Running the planner:
 
    ```sh
-   docker run -it cbs-project /bin/sh -c "cd cpp_files/cmake-build-debug && ./ConflictBasedSearch"
+   docker compose run --rm solver
    ```
 
-## Running the Visualizer
+3. Running the tests (optional):
 
-After getting the `solution.json` file using the `ConflictBasedSearch` executable, you can view the paths rendered in your browser.
+   ```sh
+   docker build -t cbs-project .
+   docker run --rm cbs-project /bin/sh -c "cd cpp_files/cmake-build-debug && ./cbs_tests"
+   ```
+
+## Running the Visualizer locally
+
+After getting the `solution.json` file using the `ConflictBasedSearch` executable, you can visualize the paths in your browser.
 
 1. Start a local server:
 
@@ -58,17 +65,17 @@ After getting the `solution.json` file using the `ConflictBasedSearch` executabl
 
 ## Benchmarks
 
-The path planner was benchmarked on the `ost003d` map using a random scenario:
+The path planner was benchmarked using the test in `test_benchmark.cpp`.
 
 | Number of Agents | Execution Time | Status |
 | :---: | :---: | :---: |
-| 1 | 3 ms | Optimal Path Found |
-| 2 | 5 ms | Optimal Path Found |
-| 3 | 8 ms | Optimal Path Found |
-| 5 | 13 ms | Optimal Path Found |
-| 8 | 20 ms | Optimal Path Found |
-| 10 | 24 ms | Optimal Path Found |
-| 12 | 268 ms | Optimal Path Found |
-| 15 | 343 ms | Optimal Path Found |
-| 20 | 733 ms | Optimal Path Found |
+| 1 | 10 ms | Optimal Path Found |
+| 2 | 9 ms | Optimal Path Found |
+| 3 | 11 ms | Optimal Path Found |
+| 5 | 18 ms | Optimal Path Found |
+| 8 | 29 ms | Optimal Path Found |
+| 10 | 36 ms | Optimal Path Found |
+| 12 | 397 ms | Optimal Path Found |
+| 15 | 498 ms | Optimal Path Found |
+| 20 | 1115 ms | Optimal Path Found |
 | 25 | Timeout (> 4 min) | Conflict space too dense |

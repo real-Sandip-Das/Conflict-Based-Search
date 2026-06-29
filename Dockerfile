@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y \
     tar \
     pkg-config
 
-RUN git clone https://github.com/microsoft/vcpkg.git /vcpkg \
+RUN git clone https://github.com/microsoft/vcpkg.git /vcpkg --depth 1 \
     && /vcpkg/bootstrap-vcpkg.sh
 
 ENV VCPKG_ROOT=/vcpkg

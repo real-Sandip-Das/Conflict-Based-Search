@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  solver:
+    build: .
+    image: cbs-solver
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./visualizer:/app/visualizer
+    command: /bin/sh -c "cd cpp_files/cmake-build-debug && ./ConflictBasedSearch"
+
+  visualizer:
+    image: nginx:alpine
+    volumes:
+      - ./visualizer:/usr/share/nginx/html:ro
+    ports:
+      - "8080:80"
+    restart: always

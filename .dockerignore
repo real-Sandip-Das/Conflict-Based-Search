@@ -1,0 +1,6 @@
+cpp_files/cmake-build-debug/
+cpp_files/build/
+.git/
+.vscode/
+.idea/
+*.log
